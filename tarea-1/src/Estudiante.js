@@ -42,7 +42,7 @@ export default function Informacion() {
       <Datos
         nombre="Marta"
         apellidos="Chavez De la O"
-        carreras={["Disenno Gráfico"]}
+        carreras={["Diseño Gráfico"]}
         cedula="908760432"
       />
       <Datos
