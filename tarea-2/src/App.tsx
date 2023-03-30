@@ -1,10 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ListaPublicacionesWrapper } from "./components/organisms/ListaPublicacionesWrapper";
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <ListaPublicacionesWrapper />
+    </div>
   );
 }
 
