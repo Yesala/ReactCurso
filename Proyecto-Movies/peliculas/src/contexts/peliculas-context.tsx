@@ -29,10 +29,6 @@ interface PeliculasContextProps {
   popularMovies: IMovie[];
 }
 
-interface ReviewsContextProps {
-  reviews: IReview[];
-}
-
 //Popular Movies//
 
 export const PeliculasContextProvider: React.FC<React.PropsWithChildren> = ({
