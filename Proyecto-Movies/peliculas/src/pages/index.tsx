@@ -2,15 +2,23 @@ import Image from "next/image";
 import { ProtectedPage } from "@/components/layouts/ProtectedPage";
 import { usePeliculasContext } from "@/contexts/peliculas-context";
 import { useFirebaseAuth } from "@/contexts/firebase-auth-context";
-import { saveFavoriteMovie } from "@/services/firebase";
+import { saveFavoriteMovie, saveReviews } from "@/services/firebase";
 import ReactStars from "react-stars";
 import Link from "next/link";
 import { Modal, useModal, Button, Text } from "@nextui-org/react";
+import React, { useState } from "react";
 
 export default function Home() {
   const { popularMovies } = usePeliculasContext();
   const { user } = useFirebaseAuth();
   const { setVisible, bindings } = useModal();
+  const [review, setReview] = useState("");
+
+  console.log(review);
+
+  const handleReviewMsj = () => {
+    saveReviews(review);
+  };
 
   return (
     <ProtectedPage>
@@ -35,9 +43,11 @@ export default function Home() {
                 style={{ margin: "10px" }}
               />
               <div className="titulo-movie">{movie.title}</div>
+
               <div className="rating">
-                <ReactStars count={5} size={24} color2={"#ffd700"} />
+                <ReactStars count={5} size={18} color2={"#ffd700"} />
               </div>
+
               <div className="review">
                 <Button
                   className="btn-comments"
@@ -57,19 +67,23 @@ export default function Home() {
                 >
                   <Modal.Header>
                     <Text id="modal-title" size={30}>
-                      Review
+                      Comentarios de la película
                     </Text>
                   </Modal.Header>
                   <Modal.Body>
                     <input
-                      className="border rounded shadow"
+                      className="border rounded shadow px-2"
                       type="text"
                       id="review"
                       name="review"
                       placeholder="Escriba su opinión aquí"
+                      // Guardar input
+                      value={review}
+                      onChange={(e) => setReview(e.target.value)}
                     />
                   </Modal.Body>
                   <Modal.Footer>
+                    <Button onPress={handleReviewMsj}>Enviar</Button>
                     <Button
                       flat
                       auto
@@ -78,7 +92,6 @@ export default function Home() {
                     >
                       Cerrar
                     </Button>
-                    <Button onPress={() => setVisible(false)}>Enviar</Button>
                   </Modal.Footer>
                 </Modal>
               </div>

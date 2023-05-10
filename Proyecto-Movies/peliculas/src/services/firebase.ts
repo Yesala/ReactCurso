@@ -1,4 +1,4 @@
-import { IMovie } from "@/contexts/peliculas-context";
+import { IMovie, IReview } from "@/contexts/peliculas-context";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -22,6 +22,22 @@ export const saveFavoriteMovie = async (movie: IMovie, firebaseUser: User) => {
   }
 };
 
+//Review input
+
+export const saveReviews = async (reviews: string) => {
+  try {
+    const docRef = await addDoc(collection(getFirestore(), "reviews"), {
+      reviews: reviews ,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//Get Todos
+
 export const getTodos = async (firebaseUser: User) => {
   const firebaseQuery = query(
     collection(getFirestore(), "movies"),
@@ -37,3 +53,21 @@ export const getTodos = async (firebaseUser: User) => {
 
   return movies;
 };
+
+
+/*export const getTodos1 = async (firebaseUser: User) => {
+  const firebaseQuery = query(
+    collection(getFirestore(), "reviews"),
+    where("userId", "==", firebaseUser.uid)
+  );
+
+  const querySnapshot = await getDocs(firebaseQuery);
+  const reviews: Review[] = [];
+
+  querySnapshot.forEach((doc) => {
+    reviews.push({ ...(doc.data() as Review) });
+  });
+
+  return reviews;
+};
+*/
