@@ -2,22 +2,33 @@ import Image from "next/image";
 import { ProtectedPage } from "@/components/layouts/ProtectedPage";
 import { usePeliculasContext } from "@/contexts/peliculas-context";
 import { useFirebaseAuth } from "@/contexts/firebase-auth-context";
-import { saveFavoriteMovie, saveReviews } from "@/services/firebase";
+import {
+  saveFavoriteMovie,
+  saveRating,
+  saveReviews,
+} from "@/services/firebase";
 import ReactStars from "react-stars";
 import Link from "next/link";
 import { Modal, useModal, Button, Text } from "@nextui-org/react";
 import React, { useState } from "react";
+import { Rating } from "react-simple-star-rating";
 
 export default function Home() {
   const { popularMovies } = usePeliculasContext();
   const { user } = useFirebaseAuth();
   const { setVisible, bindings } = useModal();
+
   const [review, setReview] = useState("");
-
   console.log(review);
-
   const handleReviewMsj = () => {
     saveReviews(review);
+  };
+  const [ratingValue, setRatingValue] = useState(0);
+  const handleRating = (rate: number) => {
+    setRatingValue(rate);
+  };
+  const handleRatingMsj = () => {
+    saveRating(ratingValue);
   };
 
   return (
@@ -43,9 +54,25 @@ export default function Home() {
                 style={{ margin: "10px" }}
               />
               <div className="titulo-movie">{movie.title}</div>
-
+              <div>
+                {/* <div>
+                  <ReactStars count={5} size={24} color2={"#ffd700"} />
+                </div> */}
+              </div>
               <div className="rating">
-                <ReactStars count={5} size={18} color2={"#ffd700"} />
+                <div className="star-svg">
+                  <Rating
+                    onClick={handleRating}
+                    initialValue={ratingValue}
+                    size={20}
+                    transition
+                  />
+                </div>
+                <div>
+                  <button className="calificacion" onClick={handleRatingMsj}>
+                    Enviar calificación
+                  </button>
+                </div>
               </div>
 
               <div className="review">

@@ -19,10 +19,15 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
   review: IReview;
+  rating: IRate;
 }
 
 export interface IReview {
   reviews: string;
+}
+
+export interface IRate {
+  ratings?: number;
 }
 
 interface PeliculasContextProps {

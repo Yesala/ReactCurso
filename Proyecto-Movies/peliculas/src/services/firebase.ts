@@ -1,4 +1,4 @@
-import { IMovie, IReview } from "@/contexts/peliculas-context";
+import { IMovie, IRate, IReview } from "@/contexts/peliculas-context";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -28,6 +28,20 @@ export const saveReviews = async (reviews: string) => {
   try {
     const docRef = await addDoc(collection(getFirestore(), "reviews"), {
       reviews: reviews ,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//Star rating
+
+export const saveRating = async (ratings: number) => {
+  try {
+    const docRef = await addDoc(collection(getFirestore(), "ratings"), {
+      ratings: ratings ,
     });
 
     console.log("Document written with ID: ", docRef.id);
