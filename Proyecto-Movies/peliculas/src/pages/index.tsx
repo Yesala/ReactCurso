@@ -7,7 +7,6 @@ import {
   saveRating,
   saveReviews,
 } from "@/services/firebase";
-import ReactStars from "react-stars";
 import Link from "next/link";
 import { Modal, useModal, Button, Text } from "@nextui-org/react";
 import React, { useState } from "react";
@@ -54,11 +53,6 @@ export default function Home() {
                 style={{ margin: "10px" }}
               />
               <div className="titulo-movie">{movie.title}</div>
-              <div>
-                {/* <div>
-                  <ReactStars count={5} size={24} color2={"#ffd700"} />
-                </div> */}
-              </div>
               <div className="rating">
                 <div className="star-svg">
                   <Rating
