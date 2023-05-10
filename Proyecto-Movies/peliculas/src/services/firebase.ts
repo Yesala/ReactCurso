@@ -53,21 +53,3 @@ export const getTodos = async (firebaseUser: User) => {
 
   return movies;
 };
-
-
-/*export const getTodos1 = async (firebaseUser: User) => {
-  const firebaseQuery = query(
-    collection(getFirestore(), "reviews"),
-    where("userId", "==", firebaseUser.uid)
-  );
-
-  const querySnapshot = await getDocs(firebaseQuery);
-  const reviews: Review[] = [];
-
-  querySnapshot.forEach((doc) => {
-    reviews.push({ ...(doc.data() as Review) });
-  });
-
-  return reviews;
-};
-*/

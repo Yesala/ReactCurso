@@ -72,39 +72,3 @@ const PeliculasContext = React.createContext<PeliculasContextProps>({
 
 export const usePeliculasContext = () =>
   React.useContext<PeliculasContextProps>(PeliculasContext);
-
-//---Inputs Reviews---//
-
-export const ReviewsContextProvider: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
-  const [reviews, setReviews] = React.useState<IReview[]>([]);
-
-  const getReviews = React.useCallback(async () => {
-    //setReviews(data.results);
-  }, []);
-
-  React.useEffect(() => {
-    getReviews();
-  }, [getReviews]);
-
-  const contextValue = React.useMemo(
-    () => ({
-      reviews,
-    }),
-    [reviews]
-  );
-
-  return (
-    <ReviewsContext.Provider value={contextValue}>
-      {children}
-    </ReviewsContext.Provider>
-  );
-};
-
-const ReviewsContext = React.createContext<ReviewsContextProps>({
-  reviews: [],
-});
-
-export const useReviewsContext = () =>
-  React.useContext<ReviewsContextProps>(ReviewsContext);

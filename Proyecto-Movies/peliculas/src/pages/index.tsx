@@ -83,7 +83,6 @@ export default function Home() {
                     />
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button onPress={handleReviewMsj}>Enviar</Button>
                     <Button
                       flat
                       auto
@@ -92,6 +91,7 @@ export default function Home() {
                     >
                       Cerrar
                     </Button>
+                    <Button onPress={handleReviewMsj}>Enviar</Button>
                   </Modal.Footer>
                 </Modal>
               </div>
